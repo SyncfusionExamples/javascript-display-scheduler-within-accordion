@@ -1,0 +1,24 @@
+﻿@using Syncfusion.EJ2
+@{
+    ViewBag.Title = "Home Page";
+}
+<br />
+@Html.EJS().Accordion("defaultAccordion").Items(ViewBag.accordionItems).Expanding("onExpand").Render()
+
+<div id="Current_Enrolments" style="display: none">
+    @Html.EJS().Schedule("schedule").Width("100%").Height("500px").Created("onCreate").SelectedDate(new DateTime(2018, 4, 22)).Render()
+</div>
+
+<script>
+    function onCreate(args) {
+        isInitial = true;
+    }
+    function onExpand(args) {
+        if (isInitial) {
+            var scheduleObj = document.getElementById('schedule').ej2_instances[0];
+            scheduleObj.refresh();
+            isInitial = false;
+        }
+    }
+</script>
+
